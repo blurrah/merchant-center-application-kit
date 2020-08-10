@@ -1,8 +1,8 @@
 import type { GraphQLError } from 'graphql';
-import type { ErrorResponse } from 'apollo-link-error';
-import type { ServerError, ServerParseError } from 'apollo-link-http-common';
+import type { ErrorResponse } from '@apollo/client/link/error';
+import type { ServerError, ServerParseError } from '@apollo/client';
 
-import { onError } from 'apollo-link-error';
+import { onError } from '@apollo/client/link/error';
 import {
   STATUS_CODES,
   LOGOUT_REASONS,

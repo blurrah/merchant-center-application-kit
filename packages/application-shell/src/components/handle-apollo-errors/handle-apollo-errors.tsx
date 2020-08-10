@@ -1,4 +1,4 @@
-import type { QueryResult } from 'react-apollo';
+import type { QueryResult } from '@apollo/client/react';
 
 import React from 'react';
 import { useDispatch } from 'react-redux';

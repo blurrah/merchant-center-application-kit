@@ -1,4 +1,4 @@
-import { RetryLink } from 'apollo-link-retry';
+import { RetryLink } from '@apollo/client/link/retry';
 import {
   STATUS_CODES,
   GRAPHQL_TARGETS,
