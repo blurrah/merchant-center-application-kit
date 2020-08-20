@@ -45,8 +45,7 @@ const createGraphqlMockServer = (
     return res.status(200).body(JSON.stringify(response));
   };
   const handleProxyGraphQLRequest = async (req, res) => {
-    const { variables } = JSON.parse(req.body());
-    const targetName = variables.target;
+    const targetName = req.header('x-graphql-target');
     return await processGraphQlRequest(targetName, req, res);
   };
 
