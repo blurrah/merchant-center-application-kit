@@ -9,6 +9,12 @@ export type Scalars = {
   Float: number;
 };
 
+export type TAdditionalUserInfo = {
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  jobTitle: Maybe<Scalars['String']>;
+};
+
 export type TAppliedActionRight = {
   __typename?: 'AppliedActionRight';
   name: Scalars['String'];
@@ -191,6 +197,7 @@ export type TMutation_SendLinkToSignUpArgs = {
   email: Scalars['String'];
   language: Maybe<Scalars['String']>;
   origin: Maybe<Scalars['String']>;
+  additionalInfo: Maybe<TAdditionalUserInfo>;
 };
 
 
@@ -299,8 +306,10 @@ export enum TPermissionScope {
   IntrospectOauthTokens = 'introspect_oauth_tokens',
   ManageApiClients = 'manage_api_clients',
   ManageCustomers = 'manage_customers',
+  ManageDiscountCodes = 'manage_discount_codes',
   ManageExtensions = 'manage_extensions',
   ManageGlobalSubscriptions = 'manage_global_subscriptions',
+  ManageImportSinks = 'manage_import_sinks',
   ManageMyOrders = 'manage_my_orders',
   ManageMyPayments = 'manage_my_payments',
   ManageMyProfile = 'manage_my_profile',
@@ -316,8 +325,14 @@ export enum TPermissionScope {
   ManageStores = 'manage_stores',
   ManageSubscriptions = 'manage_subscriptions',
   ManageTypes = 'manage_types',
+  ManageCustomerGroups = 'manage_customer_groups',
+  ManageCartDiscounts = 'manage_cart_discounts',
+  ManageShippingMethods = 'manage_shipping_methods',
+  ManageTaxCategories = 'manage_tax_categories',
   ViewApiClients = 'view_api_clients',
   ViewCustomers = 'view_customers',
+  ViewDiscountCodes = 'view_discount_codes',
+  ViewImportSinks = 'view_import_sinks',
   ViewMessages = 'view_messages',
   ViewOrderEdits = 'view_order_edits',
   ViewOrders = 'view_orders',
@@ -329,7 +344,13 @@ export enum TPermissionScope {
   ViewShoppingLists = 'view_shopping_lists',
   ViewStates = 'view_states',
   ViewStores = 'view_stores',
-  ViewTypes = 'view_types'
+  ViewTypes = 'view_types',
+  ViewCustomerGroups = 'view_customer_groups',
+  ViewCartDiscounts = 'view_cart_discounts',
+  ViewShippingMethods = 'view_shipping_methods',
+  ViewTaxCategories = 'view_tax_categories',
+  ManageCategories = 'manage_categories',
+  ViewCategories = 'view_categories'
 }
 
 export type TProject = TMetaData & {
@@ -440,6 +461,7 @@ export type TQuery = {
   allSupportedActionRights: Maybe<Array<TSupportedActionRight>>;
   allSupportedStoreScopes: Maybe<Array<TSupportedStoreScope>>;
   allSupportedMenuVisibilities: Maybe<Array<TSupportedMenuVisibility>>;
+  allSupportedOAuthScopes: Array<Scalars['String']>;
   allImpliedOAuthScopes: Array<Scalars['String']>;
   releases: Maybe<TReleaseHistory>;
   oAuthClient: Maybe<TOAuthClient>;

@@ -21,12 +21,14 @@ export type TApplicationExtension = {
   description: Maybe<Scalars['String']>;
   url: Scalars['String'];
   navbarMenu: Maybe<TNavbarMenu>;
+  oAuthScopes: Array<Scalars['String']>;
 };
 
 export type TApplicationExtensionDataInput = {
   name: Scalars['String'];
   description: Maybe<Scalars['String']>;
   url: Scalars['String'];
+  oAuthScopes: Maybe<Array<Scalars['String']>>;
   navbarMenu: TApplicationExtensionNavbarMenuDataInput;
 };
 
@@ -146,6 +148,77 @@ export type TApplicationExtensionWhereInput = {
   NOT: Maybe<Array<TApplicationExtensionWhereInput>>;
 };
 
+export enum TAuthPermission {
+  LoggedInUser = 'loggedInUser',
+  AccessToProject = 'accessToProject',
+  ManageMyOrganizations = 'manageMyOrganizations',
+  ManageProjectSettings = 'manageProjectSettings',
+  ViewProjectSettings = 'viewProjectSettings',
+  ViewCustomers = 'viewCustomers',
+  ViewSomeDiscounts = 'viewSomeDiscounts',
+  ViewProductDiscounts = 'viewProductDiscounts',
+  ViewCartDiscounts = 'viewCartDiscounts',
+  ViewDiscountCodes = 'viewDiscountCodes',
+  ViewOrders = 'viewOrders',
+  ViewProducts = 'viewProducts'
+}
+
+export type TAverageOrderValueConfiguration = {
+  __typename?: 'AverageOrderValueConfiguration';
+  id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  showPreviousTimeframe: Scalars['Boolean'];
+};
+
+export type TAverageOrderValueConfigurationInput = {
+  showPreviousTimeframe: Scalars['Boolean'];
+};
+
+export type TAverageOrderValueConfigurationWhereInput = {
+  id: Maybe<Scalars['ID']>;
+  id_not: Maybe<Scalars['ID']>;
+  id_in: Maybe<Array<Scalars['ID']>>;
+  id_not_in: Maybe<Array<Scalars['ID']>>;
+  id_lt: Maybe<Scalars['ID']>;
+  id_lte: Maybe<Scalars['ID']>;
+  id_gt: Maybe<Scalars['ID']>;
+  id_gte: Maybe<Scalars['ID']>;
+  id_contains: Maybe<Scalars['ID']>;
+  id_not_contains: Maybe<Scalars['ID']>;
+  id_starts_with: Maybe<Scalars['ID']>;
+  id_not_starts_with: Maybe<Scalars['ID']>;
+  id_ends_with: Maybe<Scalars['ID']>;
+  id_not_ends_with: Maybe<Scalars['ID']>;
+  createdAt: Maybe<Scalars['DateTime']>;
+  createdAt_not: Maybe<Scalars['DateTime']>;
+  createdAt_in: Maybe<Array<Scalars['DateTime']>>;
+  createdAt_not_in: Maybe<Array<Scalars['DateTime']>>;
+  createdAt_lt: Maybe<Scalars['DateTime']>;
+  createdAt_lte: Maybe<Scalars['DateTime']>;
+  createdAt_gt: Maybe<Scalars['DateTime']>;
+  createdAt_gte: Maybe<Scalars['DateTime']>;
+  updatedAt: Maybe<Scalars['DateTime']>;
+  updatedAt_not: Maybe<Scalars['DateTime']>;
+  updatedAt_in: Maybe<Array<Scalars['DateTime']>>;
+  updatedAt_not_in: Maybe<Array<Scalars['DateTime']>>;
+  updatedAt_lt: Maybe<Scalars['DateTime']>;
+  updatedAt_lte: Maybe<Scalars['DateTime']>;
+  updatedAt_gt: Maybe<Scalars['DateTime']>;
+  updatedAt_gte: Maybe<Scalars['DateTime']>;
+  showPreviousTimeframe: Maybe<Scalars['Boolean']>;
+  showPreviousTimeframe_not: Maybe<Scalars['Boolean']>;
+  AND: Maybe<Array<TAverageOrderValueConfigurationWhereInput>>;
+  OR: Maybe<Array<TAverageOrderValueConfigurationWhereInput>>;
+  NOT: Maybe<Array<TAverageOrderValueConfigurationWhereInput>>;
+};
+
+export enum TBestSellingLimit {
+  Five = 'FIVE',
+  Ten = 'TEN',
+  Fifteen = 'FIFTEEN'
+}
+
 export type TCartDiscountsListView = {
   __typename?: 'CartDiscountsListView';
   id: Scalars['ID'];
@@ -227,6 +300,45 @@ export type TCustomersListViewInput = {
 
 export type TCustomersListViewTableInput = {
   visibleColumns: Array<Scalars['String']>;
+};
+
+export type TDashboardView = {
+  __typename?: 'DashboardView';
+  id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  userId: Scalars['String'];
+  projectKey: Scalars['String'];
+  nameAllLocales: Maybe<Array<TLocalizedField>>;
+  isActive: Scalars['Boolean'];
+  layout: Maybe<Array<TLayoutCard>>;
+};
+
+
+export type TDashboardView_NameAllLocalesArgs = {
+  where: Maybe<TLocalizedFieldWhereInput>;
+  orderBy: Maybe<TLocalizedFieldOrderByInput>;
+  skip: Maybe<Scalars['Int']>;
+  after: Maybe<Scalars['String']>;
+  before: Maybe<Scalars['String']>;
+  first: Maybe<Scalars['Int']>;
+  last: Maybe<Scalars['Int']>;
+};
+
+
+export type TDashboardView_LayoutArgs = {
+  where: Maybe<TLayoutCardWhereInput>;
+  orderBy: Maybe<TLayoutCardOrderByInput>;
+  skip: Maybe<Scalars['Int']>;
+  after: Maybe<Scalars['String']>;
+  before: Maybe<Scalars['String']>;
+  first: Maybe<Scalars['Int']>;
+  last: Maybe<Scalars['Int']>;
+};
+
+export type TDashboardViewInput = {
+  nameAllLocales: Array<TLocalizedFieldCreateInput>;
+  layout: Array<TLayoutCardInput>;
 };
 
 
@@ -378,6 +490,153 @@ export type TImageRegexOptionsInput = {
 };
 
 
+export type TLayoutCard = {
+  __typename?: 'LayoutCard';
+  id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  key: TMetricCardType;
+  height: Scalars['Int'];
+  width: Scalars['Int'];
+  minHeight: Maybe<Scalars['Int']>;
+  minWidth: Maybe<Scalars['Int']>;
+  xPosition: Scalars['Int'];
+  yPosition: Scalars['Int'];
+  topProductsConfiguration: Maybe<TTopProductsConfiguration>;
+  salesPerformanceConfiguration: Maybe<TSalesPerformanceConfiguration>;
+  totalSalesConfiguration: Maybe<TTotalSalesConfiguration>;
+  averageOrderValueConfiguration: Maybe<TAverageOrderValueConfiguration>;
+};
+
+export type TLayoutCardInput = {
+  key: TMetricCardType;
+  height: Scalars['Int'];
+  width: Scalars['Int'];
+  minHeight: Maybe<Scalars['Int']>;
+  minWidth: Maybe<Scalars['Int']>;
+  xPosition: Scalars['Int'];
+  yPosition: Scalars['Int'];
+  topProductsConfiguration: Maybe<TTopProductsConfigurationInput>;
+  salesPerformanceConfiguration: Maybe<TSalesPerformanceConfigurationInput>;
+  totalSalesConfiguration: Maybe<TTotalSalesConfigurationInput>;
+  averageOrderValueConfiguration: Maybe<TAverageOrderValueConfigurationInput>;
+};
+
+export enum TLayoutCardOrderByInput {
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC',
+  KeyAsc = 'key_ASC',
+  KeyDesc = 'key_DESC',
+  HeightAsc = 'height_ASC',
+  HeightDesc = 'height_DESC',
+  WidthAsc = 'width_ASC',
+  WidthDesc = 'width_DESC',
+  MinHeightAsc = 'minHeight_ASC',
+  MinHeightDesc = 'minHeight_DESC',
+  MinWidthAsc = 'minWidth_ASC',
+  MinWidthDesc = 'minWidth_DESC',
+  XPositionAsc = 'xPosition_ASC',
+  XPositionDesc = 'xPosition_DESC',
+  YPositionAsc = 'yPosition_ASC',
+  YPositionDesc = 'yPosition_DESC'
+}
+
+export type TLayoutCardWhereInput = {
+  id: Maybe<Scalars['ID']>;
+  id_not: Maybe<Scalars['ID']>;
+  id_in: Maybe<Array<Scalars['ID']>>;
+  id_not_in: Maybe<Array<Scalars['ID']>>;
+  id_lt: Maybe<Scalars['ID']>;
+  id_lte: Maybe<Scalars['ID']>;
+  id_gt: Maybe<Scalars['ID']>;
+  id_gte: Maybe<Scalars['ID']>;
+  id_contains: Maybe<Scalars['ID']>;
+  id_not_contains: Maybe<Scalars['ID']>;
+  id_starts_with: Maybe<Scalars['ID']>;
+  id_not_starts_with: Maybe<Scalars['ID']>;
+  id_ends_with: Maybe<Scalars['ID']>;
+  id_not_ends_with: Maybe<Scalars['ID']>;
+  createdAt: Maybe<Scalars['DateTime']>;
+  createdAt_not: Maybe<Scalars['DateTime']>;
+  createdAt_in: Maybe<Array<Scalars['DateTime']>>;
+  createdAt_not_in: Maybe<Array<Scalars['DateTime']>>;
+  createdAt_lt: Maybe<Scalars['DateTime']>;
+  createdAt_lte: Maybe<Scalars['DateTime']>;
+  createdAt_gt: Maybe<Scalars['DateTime']>;
+  createdAt_gte: Maybe<Scalars['DateTime']>;
+  updatedAt: Maybe<Scalars['DateTime']>;
+  updatedAt_not: Maybe<Scalars['DateTime']>;
+  updatedAt_in: Maybe<Array<Scalars['DateTime']>>;
+  updatedAt_not_in: Maybe<Array<Scalars['DateTime']>>;
+  updatedAt_lt: Maybe<Scalars['DateTime']>;
+  updatedAt_lte: Maybe<Scalars['DateTime']>;
+  updatedAt_gt: Maybe<Scalars['DateTime']>;
+  updatedAt_gte: Maybe<Scalars['DateTime']>;
+  key: Maybe<TMetricCardType>;
+  key_not: Maybe<TMetricCardType>;
+  key_in: Maybe<Array<TMetricCardType>>;
+  key_not_in: Maybe<Array<TMetricCardType>>;
+  height: Maybe<Scalars['Int']>;
+  height_not: Maybe<Scalars['Int']>;
+  height_in: Maybe<Array<Scalars['Int']>>;
+  height_not_in: Maybe<Array<Scalars['Int']>>;
+  height_lt: Maybe<Scalars['Int']>;
+  height_lte: Maybe<Scalars['Int']>;
+  height_gt: Maybe<Scalars['Int']>;
+  height_gte: Maybe<Scalars['Int']>;
+  width: Maybe<Scalars['Int']>;
+  width_not: Maybe<Scalars['Int']>;
+  width_in: Maybe<Array<Scalars['Int']>>;
+  width_not_in: Maybe<Array<Scalars['Int']>>;
+  width_lt: Maybe<Scalars['Int']>;
+  width_lte: Maybe<Scalars['Int']>;
+  width_gt: Maybe<Scalars['Int']>;
+  width_gte: Maybe<Scalars['Int']>;
+  minHeight: Maybe<Scalars['Int']>;
+  minHeight_not: Maybe<Scalars['Int']>;
+  minHeight_in: Maybe<Array<Scalars['Int']>>;
+  minHeight_not_in: Maybe<Array<Scalars['Int']>>;
+  minHeight_lt: Maybe<Scalars['Int']>;
+  minHeight_lte: Maybe<Scalars['Int']>;
+  minHeight_gt: Maybe<Scalars['Int']>;
+  minHeight_gte: Maybe<Scalars['Int']>;
+  minWidth: Maybe<Scalars['Int']>;
+  minWidth_not: Maybe<Scalars['Int']>;
+  minWidth_in: Maybe<Array<Scalars['Int']>>;
+  minWidth_not_in: Maybe<Array<Scalars['Int']>>;
+  minWidth_lt: Maybe<Scalars['Int']>;
+  minWidth_lte: Maybe<Scalars['Int']>;
+  minWidth_gt: Maybe<Scalars['Int']>;
+  minWidth_gte: Maybe<Scalars['Int']>;
+  xPosition: Maybe<Scalars['Int']>;
+  xPosition_not: Maybe<Scalars['Int']>;
+  xPosition_in: Maybe<Array<Scalars['Int']>>;
+  xPosition_not_in: Maybe<Array<Scalars['Int']>>;
+  xPosition_lt: Maybe<Scalars['Int']>;
+  xPosition_lte: Maybe<Scalars['Int']>;
+  xPosition_gt: Maybe<Scalars['Int']>;
+  xPosition_gte: Maybe<Scalars['Int']>;
+  yPosition: Maybe<Scalars['Int']>;
+  yPosition_not: Maybe<Scalars['Int']>;
+  yPosition_in: Maybe<Array<Scalars['Int']>>;
+  yPosition_not_in: Maybe<Array<Scalars['Int']>>;
+  yPosition_lt: Maybe<Scalars['Int']>;
+  yPosition_lte: Maybe<Scalars['Int']>;
+  yPosition_gt: Maybe<Scalars['Int']>;
+  yPosition_gte: Maybe<Scalars['Int']>;
+  topProductsConfiguration: Maybe<TTopProductsConfigurationWhereInput>;
+  salesPerformanceConfiguration: Maybe<TSalesPerformanceConfigurationWhereInput>;
+  totalSalesConfiguration: Maybe<TTotalSalesConfigurationWhereInput>;
+  averageOrderValueConfiguration: Maybe<TAverageOrderValueConfigurationWhereInput>;
+  AND: Maybe<Array<TLayoutCardWhereInput>>;
+  OR: Maybe<Array<TLayoutCardWhereInput>>;
+  NOT: Maybe<Array<TLayoutCardWhereInput>>;
+};
+
 export type TLocalizedField = {
   __typename?: 'LocalizedField';
   id: Scalars['ID'];
@@ -475,6 +734,14 @@ export type TLocalizedFieldWhereInput = {
   NOT: Maybe<Array<TLocalizedFieldWhereInput>>;
 };
 
+export enum TMetricCardType {
+  SalesPerformance = 'SALES_PERFORMANCE',
+  TotalSales = 'TOTAL_SALES',
+  AverageOrderValue = 'AVERAGE_ORDER_VALUE',
+  ResourcesNumbers = 'RESOURCES_NUMBERS',
+  ProductTopVariants = 'PRODUCT_TOP_VARIANTS'
+}
+
 export type TMutation = {
   __typename?: 'Mutation';
   createProjectExtensionApplication: Maybe<TProjectExtension>;
@@ -503,10 +770,10 @@ export type TMutation = {
   deleteProductTypeAttributesView: Maybe<TProductTypeAttributesView>;
   activateProductTypeAttributesView: Maybe<TProductTypeAttributesView>;
   deactivateProductTypeAttributesView: Maybe<TProductTypeAttributesView>;
-  createCustomersListView: TCustomersListView;
-  updateCustomersListView: Maybe<TCustomersListView>;
   updateVariantPricesListView: Maybe<TVariantPricesListView>;
   createVariantPricesListView: Maybe<TVariantPricesListView>;
+  createCustomersListView: TCustomersListView;
+  updateCustomersListView: Maybe<TCustomersListView>;
   deleteCustomersListView: Maybe<TCustomersListView>;
   activateCustomersListView: Maybe<TCustomersListView>;
   deactivateCustomersListView: Maybe<TOrdersListView>;
@@ -517,6 +784,11 @@ export type TMutation = {
   updateProductDiscountsListView: Maybe<TProductDiscountsListView>;
   createDiscountCodesListView: Maybe<TDiscountCodesListView>;
   updateDiscountCodesListView: Maybe<TDiscountCodesListView>;
+  createDashboardView: TDashboardView;
+  updateDashboardView: Maybe<TDashboardView>;
+  deleteDashboardView: Maybe<TDashboardView>;
+  activateDashboardView: Maybe<TDashboardView>;
+  deactivateDashboardView: Maybe<TDashboardView>;
 };
 
 
@@ -657,17 +929,6 @@ export type TMutation_DeactivateProductTypeAttributesViewArgs = {
 };
 
 
-export type TMutation_CreateCustomersListViewArgs = {
-  data: TCustomersListViewInput;
-};
-
-
-export type TMutation_UpdateCustomersListViewArgs = {
-  id: Scalars['ID'];
-  data: TCustomersListViewInput;
-};
-
-
 export type TMutation_UpdateVariantPricesListViewArgs = {
   id: Scalars['ID'];
   data: TVariantPricesListViewInput;
@@ -676,6 +937,17 @@ export type TMutation_UpdateVariantPricesListViewArgs = {
 
 export type TMutation_CreateVariantPricesListViewArgs = {
   data: TVariantPricesListViewInput;
+};
+
+
+export type TMutation_CreateCustomersListViewArgs = {
+  data: TCustomersListViewInput;
+};
+
+
+export type TMutation_UpdateCustomersListViewArgs = {
+  id: Scalars['ID'];
+  data: TCustomersListViewInput;
 };
 
 
@@ -729,6 +1001,32 @@ export type TMutation_CreateDiscountCodesListViewArgs = {
 
 export type TMutation_UpdateDiscountCodesListViewArgs = {
   data: TDiscountCodesListViewInput;
+  id: Scalars['ID'];
+};
+
+
+export type TMutation_CreateDashboardViewArgs = {
+  data: TDashboardViewInput;
+};
+
+
+export type TMutation_UpdateDashboardViewArgs = {
+  id: Scalars['ID'];
+  data: TDashboardViewInput;
+};
+
+
+export type TMutation_DeleteDashboardViewArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type TMutation_ActivateDashboardViewArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type TMutation_DeactivateDashboardViewArgs = {
   id: Scalars['ID'];
 };
 
@@ -1229,7 +1527,12 @@ export type TProjectExtension_ApplicationsArgs = {
 export type TQuery = {
   __typename?: 'Query';
   projectExtension: Maybe<TProjectExtension>;
+  allProjectExtensions: Array<TProjectExtension>;
+  /** @deprecated Experimental feature - For internal usage only */
+  allCustomApplicationOAuthScopes: Array<Scalars['String']>;
   organizationExtension: Maybe<TOrganizationExtension>;
+  /** @deprecated Experimental feature - For internal usage only */
+  globalOrganizationExtension: Maybe<TOrganizationExtension>;
   ordersListViews: Array<Maybe<TOrdersListView>>;
   ordersListView: Maybe<TOrdersListView>;
   activeOrdersListView: Maybe<TOrdersListView>;
@@ -1239,18 +1542,31 @@ export type TQuery = {
   productTypeAttributesViews: Maybe<Array<Maybe<TProductTypeAttributesView>>>;
   productTypeAttributesView: Maybe<TProductTypeAttributesView>;
   activeProductTypeAttributesView: Maybe<TProductTypeAttributesView>;
-  ruleBuilderQuickSelectionValues: Maybe<Array<Maybe<TRuleBuilderQuickSelectionValues>>>;
   variantPricesListViews: Array<Maybe<TVariantPricesListView>>;
   customersListViews: Array<Maybe<TCustomersListView>>;
   customersListView: Maybe<TCustomersListView>;
   activeCustomersListView: Maybe<TCustomersListView>;
+  ruleBuilderQuickSelectionValues: Maybe<Array<Maybe<TRuleBuilderQuickSelectionValues>>>;
   cartDiscountsListView: Maybe<TCartDiscountsListView>;
   productDiscountsListView: Maybe<TProductDiscountsListView>;
   discountCodesListView: Maybe<TDiscountCodesListView>;
+  dashboardViews: Array<Maybe<TDashboardView>>;
+  dashboardView: Maybe<TDashboardView>;
+  activeDashboardView: Maybe<TDashboardView>;
+};
+
+
+export type TQuery_AllCustomApplicationOAuthScopesArgs = {
+  applicationId: Scalars['ID'];
 };
 
 
 export type TQuery_OrganizationExtensionArgs = {
+  organizationId: Scalars['String'];
+};
+
+
+export type TQuery_GlobalOrganizationExtensionArgs = {
   organizationId: Scalars['String'];
 };
 
@@ -1282,12 +1598,17 @@ export type TQuery_ActiveProductTypeAttributesViewArgs = {
 };
 
 
+export type TQuery_CustomersListViewArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type TQuery_RuleBuilderQuickSelectionValuesArgs = {
   ruleBuilderType: TRuleBuilderType;
 };
 
 
-export type TQuery_CustomersListViewArgs = {
+export type TQuery_DashboardViewArgs = {
   id: Scalars['ID'];
 };
 
@@ -1323,6 +1644,56 @@ export enum TRuleBuilderType {
   CartTargetDiscount = 'CartTargetDiscount'
 }
 
+export type TSalesPerformanceConfiguration = {
+  __typename?: 'SalesPerformanceConfiguration';
+  id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  showPreviousTimeframe: Scalars['Boolean'];
+};
+
+export type TSalesPerformanceConfigurationInput = {
+  showPreviousTimeframe: Scalars['Boolean'];
+};
+
+export type TSalesPerformanceConfigurationWhereInput = {
+  id: Maybe<Scalars['ID']>;
+  id_not: Maybe<Scalars['ID']>;
+  id_in: Maybe<Array<Scalars['ID']>>;
+  id_not_in: Maybe<Array<Scalars['ID']>>;
+  id_lt: Maybe<Scalars['ID']>;
+  id_lte: Maybe<Scalars['ID']>;
+  id_gt: Maybe<Scalars['ID']>;
+  id_gte: Maybe<Scalars['ID']>;
+  id_contains: Maybe<Scalars['ID']>;
+  id_not_contains: Maybe<Scalars['ID']>;
+  id_starts_with: Maybe<Scalars['ID']>;
+  id_not_starts_with: Maybe<Scalars['ID']>;
+  id_ends_with: Maybe<Scalars['ID']>;
+  id_not_ends_with: Maybe<Scalars['ID']>;
+  createdAt: Maybe<Scalars['DateTime']>;
+  createdAt_not: Maybe<Scalars['DateTime']>;
+  createdAt_in: Maybe<Array<Scalars['DateTime']>>;
+  createdAt_not_in: Maybe<Array<Scalars['DateTime']>>;
+  createdAt_lt: Maybe<Scalars['DateTime']>;
+  createdAt_lte: Maybe<Scalars['DateTime']>;
+  createdAt_gt: Maybe<Scalars['DateTime']>;
+  createdAt_gte: Maybe<Scalars['DateTime']>;
+  updatedAt: Maybe<Scalars['DateTime']>;
+  updatedAt_not: Maybe<Scalars['DateTime']>;
+  updatedAt_in: Maybe<Array<Scalars['DateTime']>>;
+  updatedAt_not_in: Maybe<Array<Scalars['DateTime']>>;
+  updatedAt_lt: Maybe<Scalars['DateTime']>;
+  updatedAt_lte: Maybe<Scalars['DateTime']>;
+  updatedAt_gt: Maybe<Scalars['DateTime']>;
+  updatedAt_gte: Maybe<Scalars['DateTime']>;
+  showPreviousTimeframe: Maybe<Scalars['Boolean']>;
+  showPreviousTimeframe_not: Maybe<Scalars['Boolean']>;
+  AND: Maybe<Array<TSalesPerformanceConfigurationWhereInput>>;
+  OR: Maybe<Array<TSalesPerformanceConfigurationWhereInput>>;
+  NOT: Maybe<Array<TSalesPerformanceConfigurationWhereInput>>;
+};
+
 export type TSort = {
   __typename?: 'Sort';
   id: Scalars['ID'];
@@ -1349,6 +1720,120 @@ export type TTable = {
   createdAt: Scalars['DateTime'];
   updatedAt: Scalars['DateTime'];
   visibleColumns: Array<Scalars['String']>;
+};
+
+export type TTopProductsConfiguration = {
+  __typename?: 'TopProductsConfiguration';
+  id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  bestSellingLimit: TBestSellingLimit;
+};
+
+export type TTopProductsConfigurationInput = {
+  bestSellingLimit: Maybe<TBestSellingLimit>;
+};
+
+export type TTopProductsConfigurationWhereInput = {
+  id: Maybe<Scalars['ID']>;
+  id_not: Maybe<Scalars['ID']>;
+  id_in: Maybe<Array<Scalars['ID']>>;
+  id_not_in: Maybe<Array<Scalars['ID']>>;
+  id_lt: Maybe<Scalars['ID']>;
+  id_lte: Maybe<Scalars['ID']>;
+  id_gt: Maybe<Scalars['ID']>;
+  id_gte: Maybe<Scalars['ID']>;
+  id_contains: Maybe<Scalars['ID']>;
+  id_not_contains: Maybe<Scalars['ID']>;
+  id_starts_with: Maybe<Scalars['ID']>;
+  id_not_starts_with: Maybe<Scalars['ID']>;
+  id_ends_with: Maybe<Scalars['ID']>;
+  id_not_ends_with: Maybe<Scalars['ID']>;
+  createdAt: Maybe<Scalars['DateTime']>;
+  createdAt_not: Maybe<Scalars['DateTime']>;
+  createdAt_in: Maybe<Array<Scalars['DateTime']>>;
+  createdAt_not_in: Maybe<Array<Scalars['DateTime']>>;
+  createdAt_lt: Maybe<Scalars['DateTime']>;
+  createdAt_lte: Maybe<Scalars['DateTime']>;
+  createdAt_gt: Maybe<Scalars['DateTime']>;
+  createdAt_gte: Maybe<Scalars['DateTime']>;
+  updatedAt: Maybe<Scalars['DateTime']>;
+  updatedAt_not: Maybe<Scalars['DateTime']>;
+  updatedAt_in: Maybe<Array<Scalars['DateTime']>>;
+  updatedAt_not_in: Maybe<Array<Scalars['DateTime']>>;
+  updatedAt_lt: Maybe<Scalars['DateTime']>;
+  updatedAt_lte: Maybe<Scalars['DateTime']>;
+  updatedAt_gt: Maybe<Scalars['DateTime']>;
+  updatedAt_gte: Maybe<Scalars['DateTime']>;
+  bestSellingLimit: Maybe<TBestSellingLimit>;
+  bestSellingLimit_not: Maybe<TBestSellingLimit>;
+  bestSellingLimit_in: Maybe<Array<TBestSellingLimit>>;
+  bestSellingLimit_not_in: Maybe<Array<TBestSellingLimit>>;
+  AND: Maybe<Array<TTopProductsConfigurationWhereInput>>;
+  OR: Maybe<Array<TTopProductsConfigurationWhereInput>>;
+  NOT: Maybe<Array<TTopProductsConfigurationWhereInput>>;
+};
+
+export type TTotalSalesConfiguration = {
+  __typename?: 'TotalSalesConfiguration';
+  id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  productId: Maybe<Scalars['String']>;
+};
+
+export type TTotalSalesConfigurationInput = {
+  productId: Maybe<Scalars['String']>;
+};
+
+export type TTotalSalesConfigurationWhereInput = {
+  id: Maybe<Scalars['ID']>;
+  id_not: Maybe<Scalars['ID']>;
+  id_in: Maybe<Array<Scalars['ID']>>;
+  id_not_in: Maybe<Array<Scalars['ID']>>;
+  id_lt: Maybe<Scalars['ID']>;
+  id_lte: Maybe<Scalars['ID']>;
+  id_gt: Maybe<Scalars['ID']>;
+  id_gte: Maybe<Scalars['ID']>;
+  id_contains: Maybe<Scalars['ID']>;
+  id_not_contains: Maybe<Scalars['ID']>;
+  id_starts_with: Maybe<Scalars['ID']>;
+  id_not_starts_with: Maybe<Scalars['ID']>;
+  id_ends_with: Maybe<Scalars['ID']>;
+  id_not_ends_with: Maybe<Scalars['ID']>;
+  createdAt: Maybe<Scalars['DateTime']>;
+  createdAt_not: Maybe<Scalars['DateTime']>;
+  createdAt_in: Maybe<Array<Scalars['DateTime']>>;
+  createdAt_not_in: Maybe<Array<Scalars['DateTime']>>;
+  createdAt_lt: Maybe<Scalars['DateTime']>;
+  createdAt_lte: Maybe<Scalars['DateTime']>;
+  createdAt_gt: Maybe<Scalars['DateTime']>;
+  createdAt_gte: Maybe<Scalars['DateTime']>;
+  updatedAt: Maybe<Scalars['DateTime']>;
+  updatedAt_not: Maybe<Scalars['DateTime']>;
+  updatedAt_in: Maybe<Array<Scalars['DateTime']>>;
+  updatedAt_not_in: Maybe<Array<Scalars['DateTime']>>;
+  updatedAt_lt: Maybe<Scalars['DateTime']>;
+  updatedAt_lte: Maybe<Scalars['DateTime']>;
+  updatedAt_gt: Maybe<Scalars['DateTime']>;
+  updatedAt_gte: Maybe<Scalars['DateTime']>;
+  productId: Maybe<Scalars['String']>;
+  productId_not: Maybe<Scalars['String']>;
+  productId_in: Maybe<Array<Scalars['String']>>;
+  productId_not_in: Maybe<Array<Scalars['String']>>;
+  productId_lt: Maybe<Scalars['String']>;
+  productId_lte: Maybe<Scalars['String']>;
+  productId_gt: Maybe<Scalars['String']>;
+  productId_gte: Maybe<Scalars['String']>;
+  productId_contains: Maybe<Scalars['String']>;
+  productId_not_contains: Maybe<Scalars['String']>;
+  productId_starts_with: Maybe<Scalars['String']>;
+  productId_not_starts_with: Maybe<Scalars['String']>;
+  productId_ends_with: Maybe<Scalars['String']>;
+  productId_not_ends_with: Maybe<Scalars['String']>;
+  AND: Maybe<Array<TTotalSalesConfigurationWhereInput>>;
+  OR: Maybe<Array<TTotalSalesConfigurationWhereInput>>;
+  NOT: Maybe<Array<TTotalSalesConfigurationWhereInput>>;
 };
 
 export type TVariantPricesListView = {
