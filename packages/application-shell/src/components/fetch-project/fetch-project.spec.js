@@ -52,12 +52,12 @@ describe('rendering', () => {
   it('should render error state', async () => {
     mockServer.use(
       graphql.query('FetchProject', (req, res, ctx) => {
-        return res.once(ctx.status(401));
+        return res.once(ctx.errors([{ message: 'Oops' }]));
       })
     );
     renderProject();
     await waitForElementToBeRemoved(() => screen.getByText('loading...'));
-    expect(screen.getByText(/Error: Network error(.*)/i)).toBeInTheDocument();
+    expect(screen.getByText(/Error: Oops/i)).toBeInTheDocument();
     expect(reportErrorToSentry).toHaveBeenCalled();
   });
 });
